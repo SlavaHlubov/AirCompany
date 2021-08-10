@@ -12,6 +12,7 @@ public:
 	double getRange()const { return range; }
 	double getFuelConsumption()const { return fuelConsumption; }
 	void setName(const string& str) { name = str; }
+	friend std::ostream& operator<<(std::ostream&, BaseAirplane*);
 private:
 	string name;
 	double speed;
@@ -32,7 +33,7 @@ void BaseAirplane::read(std::istream& in)
 }
 std::ostream& BaseAirplane::print()
 {
-	std::cout << " name: " << name << " speed(km/h): " << speed << " range(km): " << range << " fuel(t/h): "  << fuelConsumption <<  " ";
+	std::cout << "name: " << name << " speed(km/h): " << speed << " range(km): " << range << " fuel(t/h): "  << fuelConsumption <<  " ";
 	return std::cout;
 }
 std::ostream& operator<<(std::ostream& out, BaseAirplane* bs)

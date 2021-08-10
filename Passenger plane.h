@@ -22,7 +22,6 @@ private:
  {
 	 BaseAirplane::read(in);
 	 in >> passCapacity;
-
  }
  std::ostream& PassengerPlane::print()
  {
