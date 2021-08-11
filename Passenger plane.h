@@ -18,6 +18,7 @@ private:
  PassengerPlane::~ PassengerPlane()
 {
 }
+
  void PassengerPlane::read(std::istream& in)
  {
 	 BaseAirplane::read(in);

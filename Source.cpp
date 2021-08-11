@@ -21,12 +21,14 @@ int main()
 	AirCompany aCop;
 	aCop.addPlanes(airplanes1);
 
-	enum Tastks { Print = 1, SortByRangeOfFlight, FindPlaneByFuel, ChangeName, Exit };
+	
+	enum Tastks { Print = 1, SortByRangeOfFlight, SortByFuel,FindPlaneByFuel, ChangeName, Exit };
 	bool flag = true;
 	while (flag)
 	{
 		system("cls");
-		cout << "Enter\n1.Print airplanes\n2.Sort by range of flight\n3.Find airplanes by fuel consumption\n4.Change name of the plane\n5. Exit\n";
+		cout << "Enter\n1.Print airplanes\n2.Sort by range of flight\n3.Sort by fuel consumption\n";
+		cout << "4.Find airplanes by fuel consumption\n5.Change name of the plane\n6.Exit\n";
 		size_t task;
 		cin >> task;
 		switch (task)
@@ -66,6 +68,23 @@ int main()
 			cin >> to;
 			cout << "Airplanes:\n";
 			aCop.findAirplaneByFuel(from,to);
+			system("pause");
+		}
+		break;
+		case SortByFuel:
+		{
+			system("cls");
+			cout << "Airplanes:\n";
+			std::sort(airplanes1.begin(), airplanes1.end(), // сортировка по дальности полета
+				[](BaseAirplane* b1, BaseAirplane* b2)
+				{
+					if (b1->getFuelConsumption() < b2->getFuelConsumption())
+						return true;
+					else
+						return false;
+				}
+			);
+			std::copy(airplanes1.begin(), airplanes1.end(), std::ostream_iterator<BaseAirplane*>(cout, "\n"));
 			system("pause");
 		}
 		break;
