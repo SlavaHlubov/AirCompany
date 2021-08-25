@@ -28,5 +28,6 @@ private:
  {
 	 BaseAirplane::print();
 	 std::cout << " Passenger capacity: " << passCapacity;
+	 
 	 return std::cout;
  }

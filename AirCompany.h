@@ -29,13 +29,18 @@ void AirCompany::addPlanes(vector<BaseAirplane*> w)
         }
     );
 }
+
 void AirCompany::findAirplaneByFuel(double fuel1, double fuel2)
 {
-        std::copy_if(this->airplanes.begin(), this->airplanes.end(), std::ostream_iterator<BaseAirplane*>(cout, "\n"), [fuel1, fuel2](BaseAirplane* w)
+    vector<BaseAirplane*> findPlanes;
+        std::copy_if(this->airplanes.begin(), this->airplanes.end(), std::back_inserter(findPlanes), [fuel1, fuel2](BaseAirplane* w)
         {
             return w->getFuelConsumption() < fuel2 && w->getFuelConsumption() > fuel1;
         }
     );
+        cout << findPlanes.size() << " airplane(s) meet the specified criteria\n";
+        cout << "Airplanes:\n";
+        std::copy(findPlanes.begin(), findPlanes.end(), std::ostream_iterator<BaseAirplane*>(cout, "\n"));
 }
 void AirCompany::change(const string& str1, const string& str2)
 {

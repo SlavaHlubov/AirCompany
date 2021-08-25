@@ -1,15 +1,40 @@
 #include "Header.h"
 class MyException {};
-BaseAirplane* getptr(char marker)
+BaseAirplane* getptr(char marker) throw(MyException)
 {
 	if (marker == 'p') return new PassengerPlane();
 	else if (marker == 't') return new TransportPlane();
+}
+void fileIsOpen(std::ifstream& in) throw(MyException)
+{
+	if (!in.is_open())
+		throw MyException();
 }
 
 int main()
 {
 	vector<BaseAirplane*> airplanes1;
-	std::ifstream in("airplanes.txt");
+	std::ifstream in("airplanes11.txt");
+	try
+	{
+		fileIsOpen(in);
+	}
+	catch (MyException)
+	{
+		cout << "Error file open\n";
+		in.close();
+		system("pause");
+		system("cls");
+		cout << "Opening the file: airplanes.txt\n";
+		in.open("airplanes.txt");
+		if (!in.is_open())
+		{
+			cout << "Error file open\n";
+			return -1;
+		}
+		cout << "Done\n";
+		system("pause");
+	}
 	while (!in.eof())
 	{
 		char s;
@@ -74,7 +99,6 @@ int main()
 		case SortByFuel:
 		{
 			system("cls");
-			cout << "Airplanes:\n";
 			std::sort(airplanes1.begin(), airplanes1.end(), // сортировка по дальности полета
 				[](BaseAirplane* b1, BaseAirplane* b2)
 				{
